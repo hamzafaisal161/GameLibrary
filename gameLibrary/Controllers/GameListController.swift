@@ -17,9 +17,8 @@ class GameListController: UIViewController, GameDelegate, SearchDelegate{
     @IBOutlet weak var searchBar: UISearchBar!
     var games = [Game]()
     let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
-    let realm = try! Realm()
-    var visitedList: Results<VisitedList>?
     var searchManager = SearchManager()
+    var dbHandler: DBHandler = RealmDBHandler()
     func setData() {
         DispatchQueue.main.async {
             self.games = self.listManager.games
@@ -61,7 +60,7 @@ class GameListController: UIViewController, GameDelegate, SearchDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.title = "Games"
-        loadVisited()
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,9 +72,6 @@ class GameListController: UIViewController, GameDelegate, SearchDelegate{
         }
     }
     
-    func loadVisited(){
-        visitedList = realm.objects(VisitedList.self)
-    }
 }
 
 
@@ -84,30 +80,12 @@ class GameListController: UIViewController, GameDelegate, SearchDelegate{
 extension GameListController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameCell
-        cell.setCell(game: games[indexPath.row], visitedList: visitedList!)
+        cell.setCell(game: games[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var i = 0
-        var found = false
-        while i < visitedList!.count{
-            if visitedList![i].id == games[indexPath.row].id{
-                found = true
-            }
-            i += 1
-        }
-        if found == false{
-            do{
-                try self.realm.write{
-                    let visited = VisitedList()
-                    visited.id = games[indexPath.row].id
-                    realm.add(visited)
-                }
-            }catch{
-                print("Error saving new item, \(error)")
-            }
-        }
+        dbHandler.setVisited(id: games[indexPath.row].id)
         self.performSegue(withIdentifier: "goToGame", sender: self)
     }
     
@@ -130,9 +108,6 @@ extension GameListController: UIScrollViewDelegate{
         if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
         {
             if !isDataLoading{
-                let lastSectionIndex = tableView.numberOfSections - 1
-                let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-                
                 let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
                 spinner.startAnimating()
                 spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
