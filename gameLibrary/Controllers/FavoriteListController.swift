@@ -10,17 +10,15 @@ import UIKit
 import SwipeCellKit
 
 
- //MARK: Controller Methods
+//MARK: Controller Methods
 
 class FavoriteListController: UIViewController{
     
     var alertManager = Alert()
     @IBOutlet weak var tableView: UITableView!
-    let realm = try! Realm()
-    var games: Results<GameModel>?
-    var visitedList: Results<VisitedList>?
+    var games = [FavoriteDetail]()
     let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
-    
+    var dbHandler: DBHandler = RealmDBHandler()
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,7 +32,7 @@ class FavoriteListController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.title = "Favourites"
         loadGames()
-        if games?.count == 0{
+        if games.count == 0{
             tableView.isHidden = true
             label.isHidden = false
             label.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 285)
@@ -49,53 +47,39 @@ class FavoriteListController: UIViewController{
     }
     
     func loadGames(){
-        games = realm.objects(GameModel.self)
-        if games!.count > 0{
-            self.tabBarController?.title = "Favourites (\(games!.count))"
+        games = dbHandler.loadFavorites()
+        if games.count > 0{
+            self.tabBarController?.title = "Favourites (\(games.count))"
         }
         tableView.reloadData()
         dismiss(animated: false, completion: nil)
     }
     
- 
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToGame" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! GameViewController
-                controller.id = games![indexPath.row].id
+                controller.id = games[indexPath.row].id
             }
         }
         self.tabBarController?.title = "Favourites"
     }
     
-    func loadVisited(){
-        visitedList = realm.objects(VisitedList.self)
-    }
-    
     func updateModel(at indexPath: IndexPath){
-        do{
-            try realm.write {
-                realm.delete(games![indexPath.row])
-                if games!.count > 0{
-                    self.tabBarController?.title = "Favourites (\(games!.count))"
-                }else{
-                    self.tabBarController?.title = "Favourites"
-                }            }
-        }
-        catch{
-            print("Error deleting item row, \(error)")
-        }
+        dbHandler.removeFavorite(id: games[indexPath.row].id)
+        loadGames()
     }
     
 }
- 
- //MARK: TableView Methods
+
+//MARK: TableView Methods
 
 extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return games?.count ?? 0
+        return games.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,11 +89,18 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameCell
         cell.delegate = self
-        cell.scoreView.text = String(games![indexPath.row].score)
-        cell.titleView.text = games![indexPath.row].name
-        let url = URL(string:games![indexPath.row].imageURL)
+        cell.scoreView.text = String(games[indexPath.row].score)
+        cell.titleView.text = games[indexPath.row].name
+        let url = URL(string:games[indexPath.row].imageURL)
         cell.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: "activity.png"))
-        cell.genreView.text = games![indexPath.row].genres
+        if games[indexPath.row].genres.count > 0 {
+            cell.genreView.text = games[indexPath.row].genres[0].name
+            var i = 1
+            while i < games[indexPath.row].genres.count{
+                cell.genreView.text = cell.genreView.text! + ", \(games[indexPath.row].genres[i].name)"
+                i += 1
+            }
+        }
         return cell
     }
     

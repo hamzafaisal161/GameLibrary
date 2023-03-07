@@ -17,7 +17,7 @@ class GameCell: SwipeTableViewCell {
     @IBOutlet weak var gameImage: UIImageView!
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var resultText: UILabel!
-    
+    var dbHandler =  RealmDBHandler()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,7 +27,7 @@ class GameCell: SwipeTableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setCell(game: Game, visitedList: Results<VisitedList>){
+    func setCell(game: Game){
         if let score = game.metacritic {
             self.scoreView.text = String(score)
         }
@@ -42,13 +42,9 @@ class GameCell: SwipeTableViewCell {
             self.genreView.text?.append(", \(game.genres[i].name)")
             i += 1
         }
-        var j = 0
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0 )
-        while j < visitedList.count{
-            if visitedList[j].id == game.id{
-                self.backgroundColor = UIColor(red: 0.875, green: 0.875, blue: 0.875, alpha: 1.0 )
-            }
-            j += 1
+        if dbHandler.isVisited(id: game.id){
+            self.backgroundColor = UIColor(red: 0.875, green: 0.875, blue: 0.875, alpha: 1.0 )
         }
     }
 }

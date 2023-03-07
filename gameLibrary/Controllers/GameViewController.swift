@@ -15,10 +15,10 @@ class GameViewController: UIViewController, GameDelegate{
     var alertManager = Alert()
     var game: GameDetail?
     var id: Int?
-    let realm = try! Realm()
-    var games: Results<GameModel>?
+    var games =  [FavoriteDetail]()
     var gameManager = GameManager()
     var favorite = false
+    var dbHandler: DBHandler = RealmDBHandler()
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var gameDescription: UILabel!
@@ -47,8 +47,8 @@ class GameViewController: UIViewController, GameDelegate{
             self.gameTitle.text = self.game?.name ?? "N/A"
             self.loadGames()
             var i = 0
-            while i < self.games!.count{
-                if self.games![i].id == self.game?.id {
+            while i < self.games.count{
+                if self.games[i].id == self.game?.id {
                     self.favoriteButton.setTitle("Favorited", for: .normal)
                 }
                 i += 1
@@ -60,38 +60,13 @@ class GameViewController: UIViewController, GameDelegate{
     
     @IBAction func favoritePressed(_ sender: UIButton) {
         if favoriteButton.titleLabel?.text == "Favorite"{
-            do{
-                try self.realm.write{
-                    let newGame = GameModel()
-                    newGame.id = self.game?.id ?? 0
-                    newGame.name = self.game?.name ?? ""
-                    newGame.genres = (self.game?.genres[0].name)!
-                    for genre in 1...(self.game?.genres.count)! - 1{
-                        newGame.genres = newGame.genres + ", \(self.game!.genres[genre].name)"
-                    }
-                    newGame.score = self.game!.metacritic
-                    newGame.imageURL = self.game!.background_image
-                    realm.add(newGame)
-                    favoriteButton.setTitle("Favorited", for: .normal)
-                }
-            }catch{
-                print("Error saving new item, \(error)")
-            }
+            favoriteButton.setTitle("Favorited", for: .normal)
+            dbHandler.addFavorite(game: game!)
+            
         }else{
-            do{
-                var i = 0
-                while i < games!.count{
-                    if games![i].id == game?.id{
-                        try realm.write {
-                            realm.delete(games![i])
-                            favoriteButton.setTitle("Favorite", for: .normal)
-                        }
-                    }
-                    i += 1
-                }
-            }catch{
-                print("Error deleting item row, \(error)")
-            }
+            favoriteButton.setTitle("Favorite", for: .normal)
+            dbHandler.removeFavorite(id: game!.id)
+            
         }
     }
     
@@ -108,7 +83,7 @@ class GameViewController: UIViewController, GameDelegate{
     }
     
     func loadGames(){
-        games = realm.objects(GameModel.self)
+        games = dbHandler.loadFavorites()
     }
     
 }

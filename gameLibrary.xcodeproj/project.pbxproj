@@ -22,6 +22,9 @@
 		405787F929AE34D300CE33B5 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405787F829AE34D300CE33B5 /* GameManager.swift */; };
 		405787FB29AE389100CE33B5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405787FA29AE389100CE33B5 /* GameViewController.swift */; };
 		405E830529B20D7B0089EA94 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E830429B20D7B0089EA94 /* SearchManager.swift */; };
+		405E830F29B5EB8F0089EA94 /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E830E29B5EB8F0089EA94 /* DBHandler.swift */; };
+		405E831129B5EBEE0089EA94 /* RealmDBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E831029B5EBEE0089EA94 /* RealmDBHandler.swift */; };
+		405E831329B601220089EA94 /* FavoriteDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E831229B601220089EA94 /* FavoriteDetail.swift */; };
 		408141D829AC7C0900470F64 /* ListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408141D729AC7C0900470F64 /* ListManager.swift */; };
 		408141DA29AC7C4B00470F64 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408141D929AC7C4B00470F64 /* GameModel.swift */; };
 		408141DC29AC7D0D00470F64 /* ListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408141DB29AC7D0D00470F64 /* ListData.swift */; };
@@ -49,6 +52,9 @@
 		405787F829AE34D300CE33B5 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		405787FA29AE389100CE33B5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		405E830429B20D7B0089EA94 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		405E830E29B5EB8F0089EA94 /* DBHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHandler.swift; sourceTree = SOURCE_ROOT; };
+		405E831029B5EBEE0089EA94 /* RealmDBHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmDBHandler.swift; path = gameLibrary/Models/RealmDBHandler.swift; sourceTree = SOURCE_ROOT; };
+		405E831229B601220089EA94 /* FavoriteDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetail.swift; sourceTree = "<group>"; };
 		408141D729AC7C0900470F64 /* ListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListManager.swift; sourceTree = "<group>"; };
 		408141D929AC7C4B00470F64 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		408141DB29AC7D0D00470F64 /* ListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListData.swift; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 		405E830129B1D47D0089EA94 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				405E831029B5EBEE0089EA94 /* RealmDBHandler.swift */,
+				405E830E29B5EB8F0089EA94 /* DBHandler.swift */,
 				40157EEA29A8BC1B00567912 /* Assets.xcassets */,
 				40157EE129A8BC1800567912 /* AppDelegate.swift */,
 				40157EE329A8BC1800567912 /* SceneDelegate.swift */,
@@ -157,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				408141D929AC7C4B00470F64 /* GameModel.swift */,
+				405E831229B601220089EA94 /* FavoriteDetail.swift */,
 				4001A59B29AF79BC00C1E983 /* VisitedList.swift */,
 				408141DB29AC7D0D00470F64 /* ListData.swift */,
 				408150D129AF2C760027B72E /* GameDetail.swift */,
@@ -285,6 +294,7 @@
 				40157EE629A8BC1800567912 /* GameListController.swift in Sources */,
 				405787F629AE179200CE33B5 /* FavoriteListController.swift in Sources */,
 				40157EE229A8BC1800567912 /* AppDelegate.swift in Sources */,
+				405E831329B601220089EA94 /* FavoriteDetail.swift in Sources */,
 				400449F929B0D41D008EEF88 /* ExpandableLabel.swift in Sources */,
 				40157EE429A8BC1800567912 /* SceneDelegate.swift in Sources */,
 				408141DA29AC7C4B00470F64 /* GameModel.swift in Sources */,
@@ -293,6 +303,8 @@
 				408141E129ADDA9500470F64 /* Alert.swift in Sources */,
 				408141D829AC7C0900470F64 /* ListManager.swift in Sources */,
 				400449F529B0AF43008EEF88 /* SwipeTableViewController.swift in Sources */,
+				405E831129B5EBEE0089EA94 /* RealmDBHandler.swift in Sources */,
+				405E830F29B5EB8F0089EA94 /* DBHandler.swift in Sources */,
 				405787FB29AE389100CE33B5 /* GameViewController.swift in Sources */,
 				405787F929AE34D300CE33B5 /* GameManager.swift in Sources */,
 				4001A59C29AF79BC00C1E983 /* VisitedList.swift in Sources */,
