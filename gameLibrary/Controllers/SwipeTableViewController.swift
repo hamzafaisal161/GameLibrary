@@ -17,7 +17,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath) as! SwipeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier, for: indexPath) as! SwipeTableViewCell
          cell.delegate = self
          return cell
     }
@@ -25,10 +25,10 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
         
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+        let deleteAction = SwipeAction(style: .destructive, title: C.deleteAction) { action, indexPath in
             self.updateModel(at: indexPath)
         }
-        deleteAction.image = UIImage(named: "delete")
+        deleteAction.image = UIImage(named: C.deleteImg)
         
         return [deleteAction]
     }

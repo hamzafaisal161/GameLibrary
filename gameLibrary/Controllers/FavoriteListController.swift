@@ -27,18 +27,18 @@ class FavoriteListController: UIViewController{
         tableView.estimatedRowHeight = UITableView.automaticDimension
         let alert = alertManager.createAlert()
         present(alert, animated: true, completion: nil)
-        tableView.register(UINib(nibName: "GameCell", bundle: nil), forCellReuseIdentifier: "GameCell")
+        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.title = "Favourites"
+        self.tabBarController?.title = C.favourites
         loadGames()
         if games.count == 0{
             tableView.isHidden = true
             label.isHidden = false
             label.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 285)
             label.textAlignment = .center
-            label.text = "There is no favorite added."
+            label.text = C.noFavourites
             label.font = UIFont.systemFont(ofSize: 20.0)
             self.view.addSubview(label)
         }else{
@@ -50,7 +50,7 @@ class FavoriteListController: UIViewController{
     func loadGames(){
         games = dbHandler.loadFavorites()
         if games.count > 0{
-            self.tabBarController?.title = "Favourites (\(games.count))"
+            self.tabBarController?.title = "\(C.favourites) (\(games.count))"
         }
         tableView.reloadData()
         dismiss(animated: false, completion: nil)
@@ -59,13 +59,13 @@ class FavoriteListController: UIViewController{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToGame" {
+        if segue.identifier == C.segueName {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! GameViewController
                 controller.id = games[indexPath.row].id
             }
         }
-        self.tabBarController?.title = "Favourites"
+        self.tabBarController?.title = C.favourites
     }
     
     func updateModel(at indexPath: IndexPath){
@@ -84,16 +84,16 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "goToGame", sender: self)
+        self.performSegue(withIdentifier: C.segueName, sender: self)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier) as! GameCell
         cell.delegate = self
         cell.scoreView.text = String(games[indexPath.row].score)
         cell.titleView.text = games[indexPath.row].name
         let url = URL(string:games[indexPath.row].imageURL)
-        cell.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: "activity.png"))
+        cell.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
         if games[indexPath.row].genres.count > 0 {
             cell.genreView.text = games[indexPath.row].genres[0].name
             var i = 1
@@ -113,10 +113,10 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
 extension FavoriteListController: SwipeTableViewCellDelegate{
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+        let deleteAction = SwipeAction(style: .destructive, title: C.deleteAction) { action, indexPath in
             self.updateModel(at: indexPath)
         }
-        deleteAction.image = UIImage(named: "delete")
+        deleteAction.image = UIImage(named: C.deleteImg)
         return [deleteAction]
     }
     

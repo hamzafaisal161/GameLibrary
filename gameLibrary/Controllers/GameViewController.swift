@@ -39,30 +39,16 @@ class GameViewController: UIViewController, GameDelegate{
     func setData() {
         DispatchQueue.main.async { [weak self] in
             self!.game = self!.gameManager.gameIndex
-            let url = URL(string:self!.game?.background_image ?? "")
-            self!.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "activity.png"))
-            let layer0 = CAGradientLayer()
-            layer0.colors = [
-              UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor,
-              UIColor(red: 0, green: 0, blue: 0, alpha: 0.8).cgColor
-            ]
-            layer0.locations = [0, 1]
-            layer0.startPoint = CGPoint(x: 0.25, y: 0.5)
-            layer0.endPoint = CGPoint(x: 0.75, y: 0.5)
-            layer0.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 0, b: 1, c: -1, d: 0, tx: 1, ty: 0))
-            layer0.bounds = self!.imageView.frame.insetBy(dx: -0.5 * self!.imageView.frame.width, dy: -0.5 * self!.imageView.frame.height)
-            layer0.position = CGPoint(x: self!.imageView.frame.width / 2, y: self!.imageView.frame.height / 2)
-            self!.imageView.layer.addSublayer(layer0)
-            var description  = self!.game?.description.replacingOccurrences(of: "<p>", with: "", options: .literal, range: nil)
-            description = description!.replacingOccurrences(of: "</p>", with: "", options: .literal, range: nil)
-            description = description!.replacingOccurrences(of: "<br />", with: "", options: .literal, range: nil)
-            self!.descriptionLabel.text = description
-            self!.gameTitle.text = self!.game?.name ?? "N/A"
+            let url = URL(string:self!.game?.background_image ?? C.noSpace)
+            self!.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
+            self!.imageView.getGradient()
+            self!.descriptionLabel.text = self!.game?.description.htmlToString()
+            self!.gameTitle.text = self!.game?.name ?? C.notA
             self!.loadGames()
             var i = 0
             while i < self!.games.count{
                 if self!.games[i].id == self!.game?.id {
-                    self!.favoriteButton.setTitle("Favorited", for: .normal)
+                    self!.favoriteButton.setTitle(C.favorited, for: .normal)
                 }
                 i += 1
             }
@@ -72,12 +58,12 @@ class GameViewController: UIViewController, GameDelegate{
     }
     
     @IBAction func favoritePressed(_ sender: UIButton) {
-        if favoriteButton.titleLabel?.text == "Favorite"{
-            favoriteButton.setTitle("Favorited", for: .normal)
+        if favoriteButton.titleLabel?.text == C.favorite{
+            favoriteButton.setTitle(C.favorited, for: .normal)
             dbHandler.addFavorite(game: game!)
             
         }else{
-            favoriteButton.setTitle("Favorite", for: .normal)
+            favoriteButton.setTitle(C.favorite, for: .normal)
             dbHandler.removeFavorite(id: game!.id)
             
         }

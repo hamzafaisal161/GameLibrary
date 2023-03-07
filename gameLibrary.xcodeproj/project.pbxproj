@@ -25,6 +25,8 @@
 		405E830F29B5EB8F0089EA94 /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E830E29B5EB8F0089EA94 /* DBHandler.swift */; };
 		405E831129B5EBEE0089EA94 /* RealmDBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E831029B5EBEE0089EA94 /* RealmDBHandler.swift */; };
 		405E831329B601220089EA94 /* FavoriteDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E831229B601220089EA94 /* FavoriteDetail.swift */; };
+		406B7DA029B7424100EC13C5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406B7D9F29B7424100EC13C5 /* Utilities.swift */; };
+		406B7DA229B742B900EC13C5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406B7DA129B742B900EC13C5 /* Constants.swift */; };
 		408141D829AC7C0900470F64 /* ListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408141D729AC7C0900470F64 /* ListManager.swift */; };
 		408141DA29AC7C4B00470F64 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408141D929AC7C4B00470F64 /* GameModel.swift */; };
 		408141DC29AC7D0D00470F64 /* ListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408141DB29AC7D0D00470F64 /* ListData.swift */; };
@@ -55,6 +57,8 @@
 		405E830E29B5EB8F0089EA94 /* DBHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHandler.swift; sourceTree = SOURCE_ROOT; };
 		405E831029B5EBEE0089EA94 /* RealmDBHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmDBHandler.swift; path = gameLibrary/Models/RealmDBHandler.swift; sourceTree = SOURCE_ROOT; };
 		405E831229B601220089EA94 /* FavoriteDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetail.swift; sourceTree = "<group>"; };
+		406B7D9F29B7424100EC13C5 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		406B7DA129B742B900EC13C5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		408141D729AC7C0900470F64 /* ListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListManager.swift; sourceTree = "<group>"; };
 		408141D929AC7C4B00470F64 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		408141DB29AC7D0D00470F64 /* ListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListData.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 			children = (
 				40157EEF29A8BC1B00567912 /* Info.plist */,
 				405E830129B1D47D0089EA94 /* Supporting Files */,
+				406B7DA329B7471C00EC13C5 /* APIs */,
 				405E830229B1D4AB0089EA94 /* Controllers */,
 				405E830329B1D4BC0089EA94 /* Models */,
 				405E830029B1D3C80089EA94 /* Views */,
@@ -136,6 +141,8 @@
 		405E830129B1D47D0089EA94 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				406B7D9F29B7424100EC13C5 /* Utilities.swift */,
+				406B7DA129B742B900EC13C5 /* Constants.swift */,
 				405E831029B5EBEE0089EA94 /* RealmDBHandler.swift */,
 				405E830E29B5EB8F0089EA94 /* DBHandler.swift */,
 				40157EEA29A8BC1B00567912 /* Assets.xcassets */,
@@ -143,9 +150,6 @@
 				40157EE329A8BC1800567912 /* SceneDelegate.swift */,
 				408141E029ADDA9500470F64 /* Alert.swift */,
 				400449F829B0D41D008EEF88 /* ExpandableLabel.swift */,
-				408141D729AC7C0900470F64 /* ListManager.swift */,
-				405787F829AE34D300CE33B5 /* GameManager.swift */,
-				405E830429B20D7B0089EA94 /* SearchManager.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -172,6 +176,16 @@
 				40157F1A29A8E8A900567912 /* GameCell.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		406B7DA329B7471C00EC13C5 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				408141D729AC7C0900470F64 /* ListManager.swift */,
+				405787F829AE34D300CE33B5 /* GameManager.swift */,
+				405E830429B20D7B0089EA94 /* SearchManager.swift */,
+			);
+			path = APIs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,9 +311,11 @@
 				405E831329B601220089EA94 /* FavoriteDetail.swift in Sources */,
 				400449F929B0D41D008EEF88 /* ExpandableLabel.swift in Sources */,
 				40157EE429A8BC1800567912 /* SceneDelegate.swift in Sources */,
+				406B7DA029B7424100EC13C5 /* Utilities.swift in Sources */,
 				408141DA29AC7C4B00470F64 /* GameModel.swift in Sources */,
 				40157F1B29A8E8A900567912 /* GameCell.swift in Sources */,
 				408141DC29AC7D0D00470F64 /* ListData.swift in Sources */,
+				406B7DA229B742B900EC13C5 /* Constants.swift in Sources */,
 				408141E129ADDA9500470F64 /* Alert.swift in Sources */,
 				408141D829AC7C0900470F64 /* ListManager.swift in Sources */,
 				400449F529B0AF43008EEF88 /* SwipeTableViewController.swift in Sources */,
