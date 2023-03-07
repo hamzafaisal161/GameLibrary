@@ -27,7 +27,7 @@ class ExpandableLabel :UILabel {
     //Add readmore button in the label.
     func addReadMoreButton() {
         
-        let theNumberOfLines = numberOfLinesInLabel(yourString: self.text ?? "", labelWidth: self.frame.width, labelHeight: self.frame.height, font: self.font)
+        let theNumberOfLines = numberOfLinesInLabel(yourString: self.text ?? C.noSpace, labelWidth: self.frame.width, labelHeight: self.frame.height, font: self.font)
         
         let height = self.frame.height
         self.numberOfLines =  self.isExpaded ? 0 : 4
@@ -40,14 +40,14 @@ class ExpandableLabel :UILabel {
             button.tag = 9090
             button.frame = self.frame
             button.frame.origin.y =  self.frame.origin.y  +  self.frame.size.height + 35
-            button.setTitle("Read more...", for: .normal)
+            button.setTitle(C.moreMsg, for: .normal)
             button.titleLabel?.font = button.titleLabel?.font.withSize(11)
             button.backgroundColor = .clear
             button.setTitleColor(UIColor.blue, for: .normal)
             button.addTarget(self, action: #selector(ExpandableLabel.buttonTapped(sender:)), for: .touchUpInside)
             self.superview?.addSubview(button)
             self.superview?.bringSubviewToFront(button)
-            button.setTitle("Read less..", for: .selected)
+            button.setTitle(C.lessMsg, for: .selected)
             button.isSelected = self.isExpaded
             button.translatesAutoresizingMaskIntoConstraints = false
             

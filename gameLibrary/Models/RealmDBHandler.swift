@@ -26,7 +26,7 @@ class RealmDBHandler : DBHandler{
                     realm.add(visitedGame)
                 }
             }catch{
-                print("Error saving new item, \(error)")
+                print("\(C.newError) \(error)")
             }
         }
     }
@@ -46,8 +46,8 @@ class RealmDBHandler : DBHandler{
         if isFavorite(id: game.id) == false{
             let favoriteGame = GameModel()
             favoriteGame.id = game.id
-            if game.metacritic != 0{
-                favoriteGame.score = game.metacritic
+            if game.metacritic != nil{
+                favoriteGame.score = game.metacritic!
             }
             favoriteGame.name = game.name
             favoriteGame.genres = game.genres[0].name
@@ -55,7 +55,7 @@ class RealmDBHandler : DBHandler{
             {
                 favoriteGame.genres = favoriteGame.genres + ", \(game.genres[genre].name)"
             }
-            if game.background_image != ""{
+            if game.background_image != C.noSpace{
                 favoriteGame.imageURL = game.background_image
             }
             do{
@@ -63,7 +63,7 @@ class RealmDBHandler : DBHandler{
                     realm.add(favoriteGame)
                 }
             }catch{
-                print("Error saving new item, \(error)")
+                print("\(C.newError) \(error)")
             }
         }
     }
@@ -73,13 +73,7 @@ class RealmDBHandler : DBHandler{
         var i = 0
         var games =  [FavoriteDetail]()
         while i < favorites!.count{
-            let genreString = favorites![i].genres.replacingOccurrences(of: " ", with: "")
-            let genreNames = genreString.components(separatedBy: ",")
-            var genres = [Genres]()
-            for i in 0...genreNames.count - 1{
-                let newGenre = Genres(name: genreNames[i])
-                genres.append(newGenre)
-            }
+            let genres = favorites![i].genres.stringToGenres()
             let game = FavoriteDetail(name: favorites![i].name, imageURL: favorites![i].imageURL, score: favorites![i].score, genres: genres, id: favorites![i].id)
             i += 1
             games.append(game)
@@ -101,7 +95,7 @@ class RealmDBHandler : DBHandler{
                 }
             }
             catch{
-                print("Error deleting item row, \(error)")
+                print("\(C.deleteError) \(error)")
             }
         }
     }

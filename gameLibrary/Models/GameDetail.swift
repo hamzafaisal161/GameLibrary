@@ -14,6 +14,6 @@ struct GameDetail: Decodable{
     let website: String
     let reddit_url: String
     let background_image: String
-    let metacritic: Int
+    let metacritic: Int?
     let genres: [Genres]
 }
