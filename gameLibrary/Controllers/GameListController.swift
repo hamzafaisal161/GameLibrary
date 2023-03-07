@@ -20,26 +20,26 @@ class GameListController: UIViewController, GameDelegate, SearchDelegate{
     var searchManager = SearchManager()
     var dbHandler: DBHandler = RealmDBHandler()
     func setData() {
-        DispatchQueue.main.async {
-            self.games = self.listManager.games
-            self.label.isHidden = true
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
-            self.dismiss(animated: false, completion: nil)
-            self.tableView.tableFooterView?.isHidden = true
-            self.isDataLoading = false
+        DispatchQueue.main.async { [weak self] in
+            self!.games = self!.listManager.games
+            self!.label.isHidden = true
+            self!.tableView.isHidden = false
+            self!.tableView.reloadData()
+            self!.dismiss(animated: false, completion: nil)
+            self!.tableView.tableFooterView?.isHidden = true
+            self!.isDataLoading = false
         }
     }
     
     func setList(){
-        DispatchQueue.main.async {
-            self.games = self.searchManager.games
-            self.label.isHidden = true
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
-            self.dismiss(animated: false, completion: nil)
-            self.tableView.tableFooterView?.isHidden = true
-            self.isDataLoading = false
+        DispatchQueue.main.async { [weak self] in
+            self!.games = self!.searchManager.games
+            self!.label.isHidden = true
+            self!.tableView.isHidden = false
+            self!.tableView.reloadData()
+            self!.dismiss(animated: false, completion: nil)
+            self!.tableView.tableFooterView?.isHidden = true
+            self!.isDataLoading = false
         }
     }
     
