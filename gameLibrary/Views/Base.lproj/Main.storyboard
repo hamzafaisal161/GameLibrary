@@ -218,16 +218,24 @@
                                     <constraint firstAttribute="height" constant="300" id="qlw-Ne-vyh"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xO-Ga-11v">
-                                <rect key="frame" x="16" y="384" width="358" height="43"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="78h-Xo-1xm" customClass="ExpandableLabel" customModule="gameLibrary" customModuleProvider="target">
                                 <rect key="frame" x="16" y="490" width="358" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.19215686274509802" green="0.19215686274509802" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I57-jM-DDy">
+                                <rect key="frame" x="0.0" y="143" width="390" height="300"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="wNC-kO-9Zi"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xO-Ga-11v">
+                                <rect key="frame" x="16" y="400" width="358" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -236,10 +244,12 @@
                         <constraints>
                             <constraint firstItem="3St-U5-HXS" firstAttribute="leading" secondItem="6jn-H2-u3c" secondAttribute="leading" constant="16" id="0xo-Yf-77r"/>
                             <constraint firstItem="vis-6U-I7C" firstAttribute="trailing" secondItem="Jxb-au-0gp" secondAttribute="trailing" id="4Hc-pT-bj5"/>
+                            <constraint firstItem="Uoy-jJ-DW1" firstAttribute="top" secondItem="I57-jM-DDy" secondAttribute="bottom" constant="16" id="98F-Vx-Zgj"/>
+                            <constraint firstItem="I57-jM-DDy" firstAttribute="leading" secondItem="Jxb-au-0gp" secondAttribute="leading" id="9MI-vM-LZF"/>
                             <constraint firstItem="Jxb-au-0gp" firstAttribute="trailing" secondItem="78h-Xo-1xm" secondAttribute="trailing" constant="16" id="AHG-ZZ-p0q"/>
                             <constraint firstItem="Jxb-au-0gp" firstAttribute="trailing" secondItem="4yl-pa-Ghd" secondAttribute="trailing" constant="16" id="Bex-hQ-370"/>
+                            <constraint firstItem="I57-jM-DDy" firstAttribute="trailing" secondItem="Jxb-au-0gp" secondAttribute="trailing" id="Bzs-lz-Tiv"/>
                             <constraint firstItem="3St-U5-HXS" firstAttribute="top" secondItem="p4i-Cf-mT6" secondAttribute="bottom" constant="8" id="Etj-J6-hMT"/>
-                            <constraint firstItem="Jxb-au-0gp" firstAttribute="trailing" secondItem="0xO-Ga-11v" secondAttribute="trailing" constant="16" id="GOa-Fs-Mn7"/>
                             <constraint firstItem="Jxb-au-0gp" firstAttribute="trailing" secondItem="p4i-Cf-mT6" secondAttribute="trailing" constant="16" id="KB3-qn-hDM"/>
                             <constraint firstItem="Uoy-jJ-DW1" firstAttribute="top" secondItem="vis-6U-I7C" secondAttribute="bottom" constant="16" id="Kfc-I6-gsN"/>
                             <constraint firstItem="Jxb-au-0gp" firstAttribute="trailing" secondItem="Uoy-jJ-DW1" secondAttribute="trailing" constant="16" id="Ogv-PT-Usb"/>
@@ -247,16 +257,15 @@
                             <constraint firstItem="ysz-JG-Lzx" firstAttribute="leading" secondItem="6jn-H2-u3c" secondAttribute="leading" constant="16" id="VS1-s4-xDd"/>
                             <constraint firstItem="p4i-Cf-mT6" firstAttribute="leading" secondItem="Jxb-au-0gp" secondAttribute="leading" id="a5X-Vy-waX"/>
                             <constraint firstItem="p4i-Cf-mT6" firstAttribute="top" secondItem="ysz-JG-Lzx" secondAttribute="bottom" constant="8" id="brn-Ic-7n2"/>
-                            <constraint firstItem="0xO-Ga-11v" firstAttribute="leading" secondItem="Jxb-au-0gp" secondAttribute="leading" constant="16" id="eaO-TK-W4h"/>
                             <constraint firstItem="vis-6U-I7C" firstAttribute="leading" secondItem="Jxb-au-0gp" secondAttribute="leading" id="f1R-h1-pHJ"/>
                             <constraint firstItem="78h-Xo-1xm" firstAttribute="leading" secondItem="Jxb-au-0gp" secondAttribute="leading" constant="16" id="hHG-DR-3cn"/>
                             <constraint firstItem="78h-Xo-1xm" firstAttribute="top" secondItem="Uoy-jJ-DW1" secondAttribute="bottom" constant="8" id="leB-hP-Kse"/>
                             <constraint firstItem="Uoy-jJ-DW1" firstAttribute="leading" secondItem="Jxb-au-0gp" secondAttribute="leading" constant="16" id="mG3-fh-lTt"/>
                             <constraint firstItem="4yl-pa-Ghd" firstAttribute="top" secondItem="3St-U5-HXS" secondAttribute="bottom" constant="8" id="mZZ-dP-9qK"/>
                             <constraint firstAttribute="trailing" secondItem="ysz-JG-Lzx" secondAttribute="trailing" id="nLs-J0-Ubb"/>
-                            <constraint firstItem="0xO-Ga-11v" firstAttribute="bottom" secondItem="vis-6U-I7C" secondAttribute="bottom" constant="-16" id="omm-Ls-xlp"/>
                             <constraint firstAttribute="trailing" secondItem="3St-U5-HXS" secondAttribute="trailing" id="qtC-ME-w5R"/>
                             <constraint firstItem="ysz-JG-Lzx" firstAttribute="top" secondItem="78h-Xo-1xm" secondAttribute="bottom" constant="16" id="tsr-yE-Nh0"/>
+                            <constraint firstItem="I57-jM-DDy" firstAttribute="top" secondItem="Jxb-au-0gp" secondAttribute="top" id="wOa-5R-0DB"/>
                             <constraint firstItem="vis-6U-I7C" firstAttribute="top" secondItem="Jxb-au-0gp" secondAttribute="top" id="yXw-jX-Zl0"/>
                         </constraints>
                     </view>
@@ -279,12 +288,13 @@
                         <outlet property="favoriteButton" destination="hip-d8-SI8" id="e85-Gx-i7B"/>
                         <outlet property="gameDescription" destination="Uoy-jJ-DW1" id="qOh-Hr-hhD"/>
                         <outlet property="gameTitle" destination="0xO-Ga-11v" id="mD6-TX-nbD"/>
+                        <outlet property="gradientView" destination="I57-jM-DDy" id="PkC-wJ-wvc"/>
                         <outlet property="imageView" destination="vis-6U-I7C" id="6U1-2s-Pe8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4NA-xU-yN6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="539"/>
+            <point key="canvasLocation" x="1476.9230769230769" y="538.15165876777246"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

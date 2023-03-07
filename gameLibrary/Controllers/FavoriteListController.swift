@@ -14,6 +14,7 @@ import SwipeCellKit
 
 class FavoriteListController: UIViewController{
     
+    
     var alertManager = Alert()
     @IBOutlet weak var tableView: UITableView!
     var games = [FavoriteDetail]()
