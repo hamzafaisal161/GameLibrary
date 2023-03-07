@@ -1,0 +1,36 @@
+PODS:
+  - ReadMoreTextView (3.0.1)
+  - Realm (10.34.1):
+    - Realm/Headers (= 10.34.1)
+  - Realm/Headers (10.34.1)
+  - RealmSwift (10.34.1):
+    - Realm (= 10.34.1)
+  - SDWebImage (5.15.4):
+    - SDWebImage/Core (= 5.15.4)
+  - SDWebImage/Core (5.15.4)
+  - SwipeCellKit (2.7.1)
+
+DEPENDENCIES:
+  - ReadMoreTextView
+  - RealmSwift
+  - SDWebImage (~> 5.0)
+  - SwipeCellKit
+
+SPEC REPOS:
+  trunk:
+    - ReadMoreTextView
+    - Realm
+    - RealmSwift
+    - SDWebImage
+    - SwipeCellKit
+
+SPEC CHECKSUMS:
+  ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
+  Realm: fe824cd5b183cd55a50a6bcb4bce3ac1650e60b6
+  RealmSwift: c7f668f82982fc8b62366b78b8dc761f15141df6
+  SDWebImage: 1c39de67663e5eebb2f41324d5d580eeea12dd4c
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
+
+PODFILE CHECKSUM: 75d9be09dc56c40efa905cf723714b38576c84b6
+
+COCOAPODS: 1.11.3
