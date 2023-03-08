@@ -13,11 +13,11 @@ class ListManager{
     var games = [Game]()
     
     func fetchCell(pageNo : Int){
-        let URL = "https://api.rawg.io/api/games?page_size=10&key=3897ec2348af4eadb5048bcd1c109fce&page=" + String(pageNo)
+        let URL = C.listURL + String(pageNo)
         performRequest(with: URL)
     }
     
-    func performRequest(with urlString: String){
+    private  func performRequest(with urlString: String){
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url){(data, response,error) in
@@ -32,7 +32,7 @@ class ListManager{
         }
     }
     
-    func parseJSON(_ CellData: Data){
+    private  func parseJSON(_ CellData: Data){
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(ListData.self, from: CellData)

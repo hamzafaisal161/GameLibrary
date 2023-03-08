@@ -7,11 +7,11 @@ class GameManager{
     var gameDelegate: GameDelegate?
     var gameIndex: GameDetail? = nil
     func fetchCell(id: Int){
-        let URL = "https://api.rawg.io/api/games/\(id)?key=3897ec2348af4eadb5048bcd1c109fce"
+        let URL = "\(C.gameURL)\(id)\(C.keyParam)\(C.apiKey)"
         performRequest(with: URL)
     }
     
-    func performRequest(with urlString: String){
+    private  func performRequest(with urlString: String){
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url){(data, response,error) in
@@ -26,7 +26,7 @@ class GameManager{
         }
     }
     
-    func parseJSON(_ gameData: Data){
+    private  func parseJSON(_ gameData: Data){
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(GameDetail.self, from: gameData)

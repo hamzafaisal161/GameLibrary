@@ -7,7 +7,7 @@ target 'gameLibrary' do
 
    pod 'SDWebImage', '~> 5.0'
 pod 'RealmSwift'
-pod 'SwipeCellKit'
+pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
 pod 'ReadMoreTextView'
   # Pods for gameLibrary
 end

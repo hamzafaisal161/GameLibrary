@@ -14,7 +14,7 @@ DEPENDENCIES:
   - ReadMoreTextView
   - RealmSwift
   - SDWebImage (~> 5.0)
-  - SwipeCellKit
+  - SwipeCellKit (from `https://github.com/SwipeCellKit/SwipeCellKit.git`, branch `develop`)
 
 SPEC REPOS:
   trunk:
@@ -22,7 +22,16 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
-    - SwipeCellKit
+
+EXTERNAL SOURCES:
+  SwipeCellKit:
+    :branch: develop
+    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
+
+CHECKOUT OPTIONS:
+  SwipeCellKit:
+    :commit: 6d632bdf1b7309505566b0248a00f61b67415a37
+    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
 
 SPEC CHECKSUMS:
   ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
@@ -31,6 +40,6 @@ SPEC CHECKSUMS:
   SDWebImage: 1c39de67663e5eebb2f41324d5d580eeea12dd4c
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 75d9be09dc56c40efa905cf723714b38576c84b6
+PODFILE CHECKSUM: 9874746b56b1cb7c13431741cc3db2f6575f705a
 
 COCOAPODS: 1.11.3

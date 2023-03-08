@@ -10,9 +10,9 @@ import RealmSwift
 
 class RealmDBHandler : DBHandler{
     
-    let realm = try! Realm()
-    var visited: Results<VisitedList>?
-    var favorites: Results<GameModel>?
+    private  let realm = try! Realm()
+    private  var visited: Results<VisitedList>?
+    private  var favorites: Results<GameModel>?
     init(){
         visited = realm.objects(VisitedList.self)
     }
