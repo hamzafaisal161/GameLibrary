@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4001A59C29AF79BC00C1E983 /* VisitedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4001A59B29AF79BC00C1E983 /* VisitedList.swift */; };
-		400449F529B0AF43008EEF88 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400449F429B0AF43008EEF88 /* SwipeTableViewController.swift */; };
 		400449F929B0D41D008EEF88 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400449F829B0D41D008EEF88 /* ExpandableLabel.swift */; };
 		40157EE229A8BC1800567912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40157EE129A8BC1800567912 /* AppDelegate.swift */; };
 		40157EE429A8BC1800567912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40157EE329A8BC1800567912 /* SceneDelegate.swift */; };
@@ -38,7 +37,6 @@
 /* Begin PBXFileReference section */
 		0D07C63FDC431FABB2140FDD /* Pods_gameLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gameLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4001A59B29AF79BC00C1E983 /* VisitedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedList.swift; sourceTree = "<group>"; };
-		400449F429B0AF43008EEF88 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		400449F829B0D41D008EEF88 /* ExpandableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
 		40157EDE29A8BC1800567912 /* gameLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gameLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40157EE129A8BC1800567912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				40157EE529A8BC1800567912 /* GameListController.swift */,
-				400449F429B0AF43008EEF88 /* SwipeTableViewController.swift */,
 				405787FA29AE389100CE33B5 /* GameViewController.swift */,
 				405787F529AE179200CE33B5 /* FavoriteListController.swift */,
 			);
@@ -318,7 +315,6 @@
 				406B7DA229B742B900EC13C5 /* Constants.swift in Sources */,
 				408141E129ADDA9500470F64 /* Alert.swift in Sources */,
 				408141D829AC7C0900470F64 /* ListManager.swift in Sources */,
-				400449F529B0AF43008EEF88 /* SwipeTableViewController.swift in Sources */,
 				405E831129B5EBEE0089EA94 /* RealmDBHandler.swift in Sources */,
 				405E830F29B5EB8F0089EA94 /* DBHandler.swift in Sources */,
 				405787FB29AE389100CE33B5 /* GameViewController.swift in Sources */,

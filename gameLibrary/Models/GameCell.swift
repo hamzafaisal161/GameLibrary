@@ -33,7 +33,7 @@ class GameCell: SwipeTableViewCell {
         }
         self.titleView.text = game.name
         let url = URL(string:game.background_image ?? "")
-        self.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: "activity.png"))
+        self.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
         if game.genres.count > 1{
             self.genreView.text = game.genres[0].name
         }

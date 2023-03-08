@@ -14,12 +14,12 @@ class GameViewController: UIViewController, GameDelegate{
     
     
     @IBOutlet weak var gradientView: UIView!
-    var alertManager = Alert()
-    var game: GameDetail?
+    private var alertManager = Alert()
+    private var game: GameDetail?
     var id: Int?
-    var games =  [FavoriteDetail]()
-    var gameManager = GameManager()
-    var dbHandler: DBHandler = RealmDBHandler()
+    private var games =  [FavoriteDetail]()
+    private var gameManager = GameManager()
+    private var dbHandler: DBHandler = RealmDBHandler()
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var gameDescription: UILabel!
@@ -30,7 +30,8 @@ class GameViewController: UIViewController, GameDelegate{
         super.viewDidLoad()
         gameManager.gameDelegate = self
         DispatchQueue.main.async { [weak self] in
-            self!.gameManager.fetchCell(id: self!.id!)
+            guard let self else { return }
+            self.gameManager.fetchCell(id: self.id!)
         }
         let alert = alertManager.createAlert()
         present(alert, animated: true, completion: nil)
@@ -38,21 +39,22 @@ class GameViewController: UIViewController, GameDelegate{
     
     func setData() {
         DispatchQueue.main.async { [weak self] in
-            self!.game = self!.gameManager.gameIndex
-            let url = URL(string:self!.game?.background_image ?? C.noSpace)
-            self!.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
-            self!.imageView.getGradient()
-            self!.descriptionLabel.text = self!.game?.description.htmlToString()
-            self!.gameTitle.text = self!.game?.name ?? C.notA
-            self!.loadGames()
+            guard let self  else { return }
+            self.game = self.gameManager.gameIndex
+            let url = URL(string:self.game?.background_image ?? C.noSpace)
+            self.imageView.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
+            self.imageView.getGradient()
+            self.descriptionLabel.text = self.game?.description.htmlToString()
+            self.gameTitle.text = self.game?.name ?? C.notA
+            self.loadGames()
             var i = 0
-            while i < self!.games.count{
-                if self!.games[i].id == self!.game?.id {
-                    self!.favoriteButton.setTitle(C.favorited, for: .normal)
+            while i < self.games.count{
+                if self.games[i].id == self.game?.id {
+                    self.favoriteButton.setTitle(C.favorited, for: .normal)
                 }
                 i += 1
             }
-            self!.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }
         
     }

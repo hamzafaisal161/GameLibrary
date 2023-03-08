@@ -31,4 +31,11 @@ struct C{
     static let favorite: String = "Favorite"
     static let favourites: String = "Favourites"
     static let noFavourites: String = "There is no favorite added."
+    static let apiKey: String = "3897ec2348af4eadb5048bcd1c109fce"
+    static let pageSize: String = "10"
+    static let listURL: String = "https://api.rawg.io/api/games?page_size=\(C.pageSize)&key=\(C.apiKey)&page="
+    static let gameURL: String = "https://api.rawg.io/api/games/"
+    static let keyParam: String = "?key="
+    static let searchURL: String = "https://api.rawg.io/api/games?page_size=10&key=3897ec2348af4eadb5048bcd1c109fce&search="
+    static let pageParam: String = "&page="
 }

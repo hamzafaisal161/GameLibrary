@@ -15,36 +15,17 @@ import SwipeCellKit
 class FavoriteListController: UIViewController{
     
     
-    var alertManager = Alert()
+    private var alertManager = Alert()
     @IBOutlet weak var tableView: UITableView!
-    var games = [FavoriteDetail]()
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
-    var dbHandler: DBHandler = RealmDBHandler()
+    private var games = [FavoriteDetail]()
+    private let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
+    private var dbHandler: DBHandler = RealmDBHandler()
     override func viewDidLoad() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        let alert = alertManager.createAlert()
-        present(alert, animated: true, completion: nil)
-        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
+        self.setTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.title = C.favourites
-        loadGames()
-        if games.count == 0{
-            tableView.isHidden = true
-            label.isHidden = false
-            label.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 285)
-            label.textAlignment = .center
-            label.text = C.noFavourites
-            label.font = UIFont.systemFont(ofSize: 20.0)
-            self.view.addSubview(label)
-        }else{
-            tableView.isHidden = false
-            label.isHidden = true
-        }
+        self.setLabel()
     }
     
     func loadGames(){
@@ -68,9 +49,31 @@ class FavoriteListController: UIViewController{
         self.tabBarController?.title = C.favourites
     }
     
-    func updateModel(at indexPath: IndexPath){
-        dbHandler.removeFavorite(id: games[indexPath.row].id)
+    private func setLabel(){
+        self.tabBarController?.title = C.favourites
         loadGames()
+        if games.count == 0{
+            tableView.isHidden = true
+            label.isHidden = false
+            label.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 285)
+            label.textAlignment = .center
+            label.text = C.noFavourites
+            label.font = UIFont.systemFont(ofSize: 20.0)
+            self.view.addSubview(label)
+        }else{
+            tableView.isHidden = false
+            label.isHidden = true
+        }
+    }
+    
+    private func setTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        let alert = alertManager.createAlert()
+        present(alert, animated: true, completion: nil)
+        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
     }
     
 }
@@ -111,18 +114,20 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
 //MARK: SwipeCell Methods
 
 extension FavoriteListController: SwipeTableViewCellDelegate{
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeCellKit.SwipeActionsOrientation) -> [SwipeCellKit.SwipeAction]? {
         guard orientation == .right else { return nil }
-        let deleteAction = SwipeAction(style: .destructive, title: C.deleteAction) { action, indexPath in
-            self.updateModel(at: indexPath)
-        }
-        deleteAction.image = UIImage(named: C.deleteImg)
-        return [deleteAction]
+
+            let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+                self.dbHandler.removeFavorite(id: self.games[indexPath.row].id)
+                self.setLabel()
+            }
+            deleteAction.image = UIImage(named: "delete")
+            return [deleteAction]
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
-        options.expansionStyle = .destructive
+        options.expansionStyle = .destructive(automaticallyDelete: false)
         options.transitionStyle = .border
         return options
     }

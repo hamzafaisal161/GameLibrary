@@ -8,31 +8,20 @@ import RealmSwift
 
 class GameListController: UIViewController{
     
-    var isDataLoading: Bool = false
-    var pageNo: Int = 1
-    var didEndReached: Bool = false
-    var listManager = ListManager()
-    var alertManager = Alert()
+    private var isDataLoading: Bool = false
+    private var pageNo: Int = 1
+    private var didEndReached: Bool = false
+    private var listManager = ListManager()
+    private var alertManager = Alert()
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    var games = [Game]()
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
-    var searchManager = SearchManager()
-    var dbHandler: DBHandler = RealmDBHandler()
+    private var games = [Game]()
+    private let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
+    private var searchManager = SearchManager()
+    private var dbHandler: DBHandler = RealmDBHandler()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        searchManager.searchDelegate = self
-        listManager.gameDelegate = self
-        listManager.fetchCell(pageNo: pageNo)
-        games = listManager.games
-        let alert = alertManager.createAlert()
-        present(alert, animated: true, completion: nil)
+        self.prepareView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +36,21 @@ class GameListController: UIViewController{
                 controller.id = games[indexPath.row].id
             }
         }
+    }
+    
+    private func prepareView(){
+        super.viewDidLoad()
+        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        searchManager.searchDelegate = self
+        listManager.gameDelegate = self
+        listManager.fetchCell(pageNo: pageNo)
+        games = listManager.games
+        let alert = alertManager.createAlert()
+        present(alert, animated: true, completion: nil)
     }
     
 }
@@ -145,13 +149,14 @@ extension GameListController: UISearchBarDelegate{
 extension GameListController: GameDelegate{
     func setData() {
         DispatchQueue.main.async { [weak self] in
-            self!.games = self!.listManager.games
-            self!.label.isHidden = true
-            self!.tableView.isHidden = false
-            self!.tableView.reloadData()
-            self!.dismiss(animated: false, completion: nil)
-            self!.tableView.tableFooterView?.isHidden = true
-            self!.isDataLoading = false
+            guard let self else { return }
+            self.games = self.listManager.games
+            self.label.isHidden = true
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+            self.dismiss(animated: false, completion: nil)
+            self.tableView.tableFooterView?.isHidden = true
+            self.isDataLoading = false
         }
     }
 }
@@ -162,13 +167,14 @@ extension GameListController: GameDelegate{
 extension GameListController: SearchDelegate{
     func setList(){
         DispatchQueue.main.async { [weak self] in
-            self!.games = self!.searchManager.games
-            self!.label.isHidden = true
-            self!.tableView.isHidden = false
-            self!.tableView.reloadData()
-            self!.dismiss(animated: false, completion: nil)
-            self!.tableView.tableFooterView?.isHidden = true
-            self!.isDataLoading = false
+            guard let self else { return }
+            self.games = self.searchManager.games
+            self.label.isHidden = true
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+            self.dismiss(animated: false, completion: nil)
+            self.tableView.tableFooterView?.isHidden = true
+            self.isDataLoading = false
         }
     }
 }
