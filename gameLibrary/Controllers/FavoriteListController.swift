@@ -69,11 +69,11 @@ class FavoriteListController: UIViewController{
     private func setTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.register(GameCell.classForCoder(), forCellReuseIdentifier: C.cellIdentifier)
+        tableView.rowHeight = 156
         let alert = alertManager.createAlert()
         present(alert, animated: true, completion: nil)
-        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
+        
     }
     
 }
@@ -93,6 +93,7 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier) as! GameCell
         cell.delegate = self
+        cell.prepareCell()
         cell.scoreView.text = String(games[indexPath.row].score)
         cell.titleView.text = games[indexPath.row].name
         let url = URL(string:games[indexPath.row].imageURL)

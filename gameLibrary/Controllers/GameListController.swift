@@ -26,6 +26,7 @@ class GameListController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.title = C.games
+        tableView.rowHeight = 156
         tableView.reloadData()
     }
     
@@ -40,7 +41,7 @@ class GameListController: UIViewController{
     
     private func prepareView(){
         super.viewDidLoad()
-        tableView.register(UINib(nibName: C.cellIdentifier, bundle: nil), forCellReuseIdentifier: C.cellIdentifier)
+        tableView.register(GameCell.classForCoder(), forCellReuseIdentifier: C.cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension

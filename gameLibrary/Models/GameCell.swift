@@ -8,26 +8,23 @@
 import UIKit
 import SwipeCellKit
 import RealmSwift
+import SnapKit
 
 class GameCell: SwipeTableViewCell {
     
-    @IBOutlet weak var genreView: UILabel!
-    @IBOutlet weak var scoreView: UILabel!
-    @IBOutlet weak var metaView: UILabel!
-    @IBOutlet weak var gameImage: UIImageView!
-    @IBOutlet weak var titleView: UILabel!
-    @IBOutlet weak var resultText: UILabel!
+    let gameImage = UIImageView()
+    let genreView = UILabel()
+    let scoreView = UILabel()
+    let metaView = UILabel()
+    let titleView = UILabel()
+    let resultText = UILabel()
     var dbHandler =  RealmDBHandler()
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
+    
     
     func setCell(game: Game){
+        
+        self.prepareCell()
         if let score = game.metacritic {
             self.scoreView.text = String(score)
         }
@@ -35,7 +32,7 @@ class GameCell: SwipeTableViewCell {
         let url = URL(string:game.background_image ?? "")
         self.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
         if game.genres.count > 1{
-            self.genreView.text = game.genres[0].name
+           self.genreView.text = game.genres[0].name
         }
         var i = 1
         while i < game.genres.count{
@@ -46,6 +43,51 @@ class GameCell: SwipeTableViewCell {
         if dbHandler.isVisited(id: game.id){
             self.backgroundColor = UIColor(red: 0.875, green: 0.875, blue: 0.875, alpha: 1.0 )
         }
+    }
+    
+    func prepareCell(){
+        self.addSubview(gameImage)
+        self.addSubview(genreView)
+        self.addSubview(scoreView)
+        self.addSubview(metaView)
+        self.addSubview(titleView)
+        self.addSubview(resultText)
+        gameImage.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self).offset(16)
+            make.leading.equalTo(self).offset(16)
+            make.size.equalTo(CGSize(width: 120, height: 124))
+
+        }
+        
+        titleView.font = titleView.font.withSize(24)
+        titleView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView).offset(16)
+            make.left.equalTo(gameImage.snp.rightMargin).offset(24)
+            make.right.equalTo(contentView).offset(16)
+        }
+        
+        genreView.font = genreView.font.withSize(15)
+        genreView.textColor = UIColor(red: 138/256, green: 138/256, blue: 143/256, alpha: 1.0)
+        genreView.snp.makeConstraints { (make) -> Void in
+            make.bottom.equalTo(gameImage.snp_bottomMargin).offset(6)
+            make.left.equalTo(gameImage.snp.rightMargin).offset(24)
+            make.right.equalTo(contentView).offset(16)
+        }
+        
+        metaView.text = "metacritic: "
+        metaView.font = metaView.font.withSize(16)
+        metaView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(titleView.snp.topMargin).offset(60)
+            make.left.equalTo(gameImage.snp.rightMargin).offset(24)
+        }
+        scoreView.font = scoreView.font.withSize(20)
+        scoreView.textColor = UIColor(red: 216/256, green: 0/256, blue: 0/256, alpha: 1.0)
+        scoreView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(titleView.snp.topMargin).offset(58)
+            make.left.equalTo(metaView.snp.rightMargin).offset(6)
+            make.right.equalTo(contentView).offset(16)
+        }
+        
     }
 }
 

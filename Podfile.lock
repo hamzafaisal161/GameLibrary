@@ -8,12 +8,14 @@ PODS:
   - SDWebImage (5.15.4):
     - SDWebImage/Core (= 5.15.4)
   - SDWebImage/Core (5.15.4)
+  - SnapKit (5.6.0)
   - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - ReadMoreTextView
   - RealmSwift
   - SDWebImage (~> 5.0)
+  - SnapKit (~> 5.6.0)
   - SwipeCellKit (from `https://github.com/SwipeCellKit/SwipeCellKit.git`, branch `develop`)
 
 SPEC REPOS:
@@ -22,6 +24,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
+    - SnapKit
 
 EXTERNAL SOURCES:
   SwipeCellKit:
@@ -38,8 +41,9 @@ SPEC CHECKSUMS:
   Realm: fe824cd5b183cd55a50a6bcb4bce3ac1650e60b6
   RealmSwift: c7f668f82982fc8b62366b78b8dc761f15141df6
   SDWebImage: 1c39de67663e5eebb2f41324d5d580eeea12dd4c
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 9874746b56b1cb7c13431741cc3db2f6575f705a
+PODFILE CHECKSUM: 2a839a27ddd68517cc7ab64e4087c20a86eddb59
 
 COCOAPODS: 1.11.3
