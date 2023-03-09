@@ -21,6 +21,21 @@ class GameCell: SwipeTableViewCell {
     var dbHandler =  RealmDBHandler()
     
     
+    func setCell(game: FavoriteDetail){
+        self.scoreView.text = String(game.score)
+        self.titleView.text = game.name
+        let url = URL(string: game.imageURL)
+        self.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
+        if game.genres.count > 0 {
+            self.genreView.text = game.genres[0].name
+            var i = 1
+            while i < game.genres.count{
+                self.genreView.text = self.genreView.text! + ", \(game.genres[i].name)"
+                i += 1
+            }
+        }
+    }
+    
     
     func setCell(game: Game){
         

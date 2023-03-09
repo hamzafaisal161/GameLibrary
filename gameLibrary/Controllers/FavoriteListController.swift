@@ -94,18 +94,7 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
         let cell = self.tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier) as! GameCell
         cell.delegate = self
         cell.prepareCell()
-        cell.scoreView.text = String(games[indexPath.row].score)
-        cell.titleView.text = games[indexPath.row].name
-        let url = URL(string:games[indexPath.row].imageURL)
-        cell.gameImage.sd_setImage(with: url, placeholderImage: UIImage(named: C.loaderImg))
-        if games[indexPath.row].genres.count > 0 {
-            cell.genreView.text = games[indexPath.row].genres[0].name
-            var i = 1
-            while i < games[indexPath.row].genres.count{
-                cell.genreView.text = cell.genreView.text! + ", \(games[indexPath.row].genres[i].name)"
-                i += 1
-            }
-        }
+        cell.setCell(game: games[indexPath.row])
         return cell
     }
     
