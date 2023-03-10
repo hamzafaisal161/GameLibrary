@@ -16,16 +16,20 @@ class FavoriteListController: UIViewController{
     
     
     private var alertManager = Alert()
-    @IBOutlet weak var tableView: UITableView!
+    var tableView = UITableView()
+    var listView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     private var games = [FavoriteDetail]()
     private let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     private var dbHandler: DBHandler = RealmDBHandler()
     override func viewDidLoad() {
+        self.prepareView()
         self.setTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.setLabel()
+        
     }
     
     func loadGames(){
@@ -76,6 +80,20 @@ class FavoriteListController: UIViewController{
         
     }
     
+    func prepareView(){
+        self.view.addSubview(listView)
+        listView.addSubview(tableView)
+        tableView.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1.0)
+        tableView.separatorStyle = .none
+        
+        tableView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(listView.snp.top).offset(150)
+            make.leading.equalTo(listView.snp.leading)
+            make.size.equalTo(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+            make.bottom.equalTo(listView.snp.bottom)
+        }
+    }
+    
 }
 
 //MARK: TableView Methods
@@ -87,7 +105,9 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: C.segueName, sender: self)
+        let newViewController = GameViewController()
+        self.navigationController?.pushViewController(newViewController, animated: true)
+        newViewController.id = games[indexPath.row].id
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
