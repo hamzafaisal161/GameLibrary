@@ -5,7 +5,6 @@ import SnapKit
 
 //MARK: Controller Methods
 
-
 class GameListController: UIViewController{
     
     private var isDataLoading: Bool = false
@@ -82,7 +81,6 @@ class GameListController: UIViewController{
 
 
 //MARK: TableView Methods
-
 extension GameListController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier) as! GameCell
@@ -105,7 +103,6 @@ extension GameListController: UITableViewDelegate, UITableViewDataSource{
 
 
 //MARK: ScrollBar Methods
-
 extension GameListController: UIScrollViewDelegate{
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -135,7 +132,6 @@ extension GameListController: UIScrollViewDelegate{
 
 
 //MARK: SearchBar Methods
-
 extension GameListController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -172,7 +168,6 @@ extension GameListController: UISearchBarDelegate{
 }
 
 //MARK: GameDelegate Methods
-
 extension GameListController: GameDelegate{
     func setData() {
         DispatchQueue.main.async { [weak self] in
@@ -190,7 +185,6 @@ extension GameListController: GameDelegate{
 
 
 //MARK: SearchDelegate Methods
-
 extension GameListController: SearchDelegate{
     func setList(){
         DispatchQueue.main.async { [weak self] in

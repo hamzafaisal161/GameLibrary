@@ -4,7 +4,6 @@
 //
 //  Created by Hamza Faisal on 28/02/2023.
 //
-
 import UIKit
 import RealmSwift
 import SDWebImage
@@ -95,6 +94,7 @@ class GameViewController: UIViewController, GameDelegate{
     
     
     func setupView(){
+        favoriteButton = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(favoritePressed))
         self.view.addSubview(displayView)
         self.navigationItem.rightBarButtonItem = favoriteButton
         displayView.addSubview(descriptionLabel)
@@ -106,7 +106,6 @@ class GameViewController: UIViewController, GameDelegate{
         displayView.addSubview(secondSeperator)
         displayView.addSubview(websiteButton)
         displayView.backgroundColor = UIColor.white
-        favoriteButton = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(favoritePressed))
         gameTitle.font = gameTitle.font.withSize(34)
         gameTitle.textColor = UIColor.white
         gameDescription.text = "Game Description"
