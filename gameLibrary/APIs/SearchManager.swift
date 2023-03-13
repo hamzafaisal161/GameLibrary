@@ -6,8 +6,8 @@ protocol SearchDelegate{
     func setList()
 }
 class SearchManager{
-    
-    var searchDelegate: SearchDelegate?
+    //API for loading result of search query
+    var searchDelegate: SearchDelegate? //creates a URL for API and calls method for performing request
     var games = [Game]()
     
     func fetchCell(search : String, pageNo: Int){
@@ -15,7 +15,7 @@ class SearchManager{
         performRequest(with: URL)
     }
     
-    private  func performRequest(with urlString: String){
+    private  func performRequest(with urlString: String){ //creates a URL session for network request
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url){(data, response,error) in
@@ -29,8 +29,8 @@ class SearchManager{
             task.resume()
         }
     }
-    
-    private  func parseJSON(_ CellData: Data){
+     
+    private  func parseJSON(_ CellData: Data){ //parses the JSON format data into a Game type object
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(ListData.self, from: CellData)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DBHandler {
+protocol DBHandler { //protocol for DB setup
     func setVisited(id: Int)
     func isVisited(id: Int)-> Bool
     func addFavorite(game: GameDetail)

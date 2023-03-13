@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ListData: Decodable{
+struct ListData: Decodable{ //models for parsing data from API
     let results: [Game]
 }
 

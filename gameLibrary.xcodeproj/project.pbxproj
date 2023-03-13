@@ -15,6 +15,9 @@
 		40157EEB29A8BC1B00567912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40157EEA29A8BC1B00567912 /* Assets.xcassets */; };
 		40157EEE29A8BC1B00567912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40157EEC29A8BC1B00567912 /* LaunchScreen.storyboard */; };
 		40157F1B29A8E8A900567912 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40157F1A29A8E8A900567912 /* GameCell.swift */; };
+		404DF29C29BF2E9E001BC3C0 /* GameListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404DF29B29BF2E9E001BC3C0 /* GameListView.swift */; };
+		404DF29E29BF2F10001BC3C0 /* GameDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404DF29D29BF2F10001BC3C0 /* GameDetailView.swift */; };
+		404DF2A029BF2F7D001BC3C0 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404DF29F29BF2F7D001BC3C0 /* FavoriteListView.swift */; };
 		405787F629AE179200CE33B5 /* FavoriteListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405787F529AE179200CE33B5 /* FavoriteListController.swift */; };
 		405787F929AE34D300CE33B5 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405787F829AE34D300CE33B5 /* GameManager.swift */; };
 		405787FB29AE389100CE33B5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405787FA29AE389100CE33B5 /* GameViewController.swift */; };
@@ -44,6 +47,9 @@
 		40157EED29A8BC1B00567912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40157EEF29A8BC1B00567912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40157F1A29A8E8A900567912 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		404DF29B29BF2E9E001BC3C0 /* GameListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; };
+		404DF29D29BF2F10001BC3C0 /* GameDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailView.swift; sourceTree = "<group>"; };
+		404DF29F29BF2F7D001BC3C0 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
 		405787F529AE179200CE33B5 /* FavoriteListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListController.swift; sourceTree = "<group>"; };
 		405787F829AE34D300CE33B5 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		405787FA29AE389100CE33B5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				40157EEC29A8BC1B00567912 /* LaunchScreen.storyboard */,
+				404DF29B29BF2E9E001BC3C0 /* GameListView.swift */,
+				404DF29D29BF2F10001BC3C0 /* GameDetailView.swift */,
+				404DF29F29BF2F7D001BC3C0 /* FavoriteListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,15 +304,18 @@
 			files = (
 				408150D229AF2C760027B72E /* GameDetail.swift in Sources */,
 				40157EE629A8BC1800567912 /* GameListController.swift in Sources */,
+				404DF29C29BF2E9E001BC3C0 /* GameListView.swift in Sources */,
 				405787F629AE179200CE33B5 /* FavoriteListController.swift in Sources */,
 				40157EE229A8BC1800567912 /* AppDelegate.swift in Sources */,
 				405E831329B601220089EA94 /* FavoriteDetail.swift in Sources */,
 				400449F929B0D41D008EEF88 /* ExpandableLabel.swift in Sources */,
 				40157EE429A8BC1800567912 /* SceneDelegate.swift in Sources */,
 				406B7DA029B7424100EC13C5 /* Utilities.swift in Sources */,
+				404DF29E29BF2F10001BC3C0 /* GameDetailView.swift in Sources */,
 				408141DA29AC7C4B00470F64 /* GameModel.swift in Sources */,
 				40157F1B29A8E8A900567912 /* GameCell.swift in Sources */,
 				408141DC29AC7D0D00470F64 /* ListData.swift in Sources */,
+				404DF2A029BF2F7D001BC3C0 /* FavoriteListView.swift in Sources */,
 				406B7DA229B742B900EC13C5 /* Constants.swift in Sources */,
 				408141E129ADDA9500470F64 /* Alert.swift in Sources */,
 				408141D829AC7C0900470F64 /* ListManager.swift in Sources */,

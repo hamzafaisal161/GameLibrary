@@ -11,13 +11,13 @@ import RealmSwift
 class RealmDBHandler : DBHandler{
     
     private  let realm = try! Realm()
-    private  var visited: Results<VisitedList>?
-    private  var favorites: Results<GameModel>?
+    private  var visited: Results<VisitedList>? //object for storing ids of visited games
+    private  var favorites: Results<GameModel>? //object for storing records of favorited games
     init(){
         visited = realm.objects(VisitedList.self)
     }
     
-    func setVisited(id: Int) {
+    func setVisited(id: Int) { // stores the id of visited game
         if self.isVisited(id: id) == false{
             do{
                 try self.realm.write{
@@ -31,7 +31,7 @@ class RealmDBHandler : DBHandler{
         }
     }
     
-    func isVisited(id: Int)-> Bool {
+    func isVisited(id: Int)-> Bool { //checks if a game is visited
         var i = 0
         while i < visited!.count{
             if visited![i].id == id{
@@ -42,7 +42,7 @@ class RealmDBHandler : DBHandler{
         return false
     }
     
-    func addFavorite(game: GameDetail) {
+    func addFavorite(game: GameDetail) { //adds a game to the faovrite list and saves it in the DB
         if isFavorite(id: game.id) == false{
             let favoriteGame = GameModel()
             favoriteGame.id = game.id
@@ -68,7 +68,7 @@ class RealmDBHandler : DBHandler{
         }
     }
     
-    func loadFavorites() -> [FavoriteDetail] {
+    func loadFavorites() -> [FavoriteDetail] { //loads all the favorited games from DB
         favorites = realm.objects(GameModel.self)
         var i = 0
         var games =  [FavoriteDetail]()
@@ -81,7 +81,7 @@ class RealmDBHandler : DBHandler{
         return games
     }
     
-    func removeFavorite(id: Int) {
+    func removeFavorite(id: Int) { //deletes a favorited game from the DB
         if isFavorite(id: id){
             do{
                 var i = 0
@@ -99,8 +99,8 @@ class RealmDBHandler : DBHandler{
             }
         }
     }
-    
-    func isFavorite(id: Int) -> Bool {
+
+    func isFavorite(id: Int) -> Bool { //checks if the game has been favorited
         var i = 0
         while i < favorites!.count{
             if id == favorites![i].id{

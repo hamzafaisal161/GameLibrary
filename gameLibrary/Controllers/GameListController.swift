@@ -8,15 +8,15 @@ import SnapKit
 class GameListController: UIViewController{
     
     private var isDataLoading: Bool = false
-    private var pageNo: Int = 1
+    var pageNo: Int = 1
     private var didEndReached: Bool = false
-    private var listManager = ListManager()
-    private var alertManager = Alert()
+    var listManager = ListManager()
+    var alertManager = Alert()
     var tableView = UITableView()
-    private var games = [Game]()
-    private let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
-    private var searchManager = SearchManager()
-    private var dbHandler: DBHandler = RealmDBHandler()
+    var games = [Game]()
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
+    var searchManager = SearchManager()
+    var dbHandler: DBHandler = RealmDBHandler()
     var searchBar = UISearchBar()
     var listView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class GameListController: UIViewController{
         self.prepareView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) { //setting up the tableview and title
         self.tabBarController?.title = C.games
         tableView.rowHeight = 156
         tableView.reloadData()
@@ -35,7 +35,7 @@ class GameListController: UIViewController{
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {  //passing the id of the game to the GameViewController
         if segue.identifier == C.segueName{
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! GameViewController
@@ -44,51 +44,18 @@ class GameListController: UIViewController{
         }
     }
     
-    private func prepareView(){
-        super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        tableView.register(GameCell.classForCoder(), forCellReuseIdentifier: C.cellIdentifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        searchManager.searchDelegate = self
-        listManager.gameDelegate = self
-        listManager.fetchCell(pageNo: pageNo)
-        games = listManager.games
-    }
-    
-
-    private func prepareScreen(){
-        self.view.addSubview(listView)
-        self.view.addSubview(searchBar)
-        self.view.addSubview(tableView)
-        searchBar.placeholder = "Search for the games"
-        searchBar.delegate = self
-        searchBar.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(listView).offset(150)
-            make.size.equalTo(CGSize(width: listView.frame.width, height: 50))
-            make.leading.equalTo(listView.snp.leading)
-        }
-        tableView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(searchBar.snp.bottom).offset(0)
-            make.leading.equalTo(listView.snp.leading)
-            make.size.equalTo(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-            make.bottom.equalTo(listView.snp.bottom).inset(20)
-        }
-    }
-    
 }
 
 
 //MARK: TableView Methods
 extension GameListController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { //creating a cekk for the tableView
         let cell = self.tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier) as! GameCell
         cell.setCell(game: games[indexPath.row])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { //setting a game as visited when it is clicked
         dbHandler.setVisited(id: games[indexPath.row].id)
         let newViewController = GameViewController()
         self.navigationController?.pushViewController(newViewController, animated: true)
@@ -109,17 +76,17 @@ extension GameListController: UIScrollViewDelegate{
         isDataLoading = false
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { //if the next page is loaded then fetch next page of games
         if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
         {
             if !isDataLoading{
-                let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+                let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)  //create a loader
                 spinner.startAnimating()
                 spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
                 self.tableView.tableFooterView = spinner
                 self.tableView.tableFooterView?.isHidden = false
                 isDataLoading = true
-                self.pageNo = self.pageNo+1
+                self.pageNo = self.pageNo + 1
                 if searchBar.text != C.noSpace {
                     searchManager.fetchCell(search: searchBar.text!,pageNo: pageNo)
                 }else{
@@ -134,17 +101,17 @@ extension GameListController: UIScrollViewDelegate{
 //MARK: SearchBar Methods
 extension GameListController: UISearchBarDelegate{
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) { //if a game was searched
         pageNo = 1
         games = []
         if searchBar.text == C.noSpace {
             games = listManager.games
         } else{
-            searchManager.fetchCell(search: searchBar.text!,pageNo: pageNo)
+            searchManager.fetchCell(search: searchBar.text!,pageNo: pageNo) // if a game was returned
             let alert = alertManager.createAlert()
             present(alert, animated: true, completion: nil)
         }
-        if games.count == 0{
+        if games.count == 0{ // if no result was returned then display label
             tableView.isHidden = true
             label.isHidden = false
             label.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: 285)
@@ -156,7 +123,7 @@ extension GameListController: UISearchBarDelegate{
         tableView.reloadData()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) { //display all games if no search
         if searchBar.text?.count == 0 {
             pageNo = 1
             DispatchQueue.main.async {
@@ -169,7 +136,7 @@ extension GameListController: UISearchBarDelegate{
 
 //MARK: GameDelegate Methods
 extension GameListController: GameDelegate{
-    func setData() {
+    func setData() { // load all the games
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.games = self.listManager.games
@@ -186,7 +153,7 @@ extension GameListController: GameDelegate{
 
 //MARK: SearchDelegate Methods
 extension GameListController: SearchDelegate{
-    func setList(){
+    func setList(){ // display the search result
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.games = self.searchManager.games

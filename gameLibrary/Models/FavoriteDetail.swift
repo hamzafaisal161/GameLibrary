@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavoriteDetail{
+struct FavoriteDetail{ //model for loading data from Dealm for favorite game
     var name: String
     var imageURL: String
     var score: Int

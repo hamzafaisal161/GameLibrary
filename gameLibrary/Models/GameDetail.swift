@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GameDetail: Decodable{
+struct GameDetail: Decodable{ //model for loading game detail from Realm
     let name: String
     let id: Int
     let description: String

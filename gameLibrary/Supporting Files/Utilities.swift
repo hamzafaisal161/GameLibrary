@@ -8,12 +8,12 @@
 import UIKit
 
 extension String {
-    func htmlToString() -> String {
+    func htmlToString() -> String { // function for converting HTML format data to string format
         return  try! NSAttributedString(data: self.data(using: .utf8)!,
                                         options: [.documentType: NSAttributedString.DocumentType.html],
                                         documentAttributes: nil).string
     }
-    func stringToGenres()-> [Genres]{
+    func stringToGenres()-> [Genres]{ // function for converting string to Genre data types
         let genreString = self.replacingOccurrences(of: C.oneSpace, with: C.noSpace)
         let genreNames = genreString.components(separatedBy: C.comma)
         var genres = [Genres]()
@@ -27,7 +27,7 @@ extension String {
 
 
 extension UIImageView{
-    func getGradient(){
+    func getGradient(){ //function for adding a gradient to an image
         let layer0 = CAGradientLayer()
         layer0.colors = [
           UIColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor,

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class GameModel: Object{
+class GameModel: Object{ // model for Realm DB to store favorite game detail
     @objc dynamic var name: String = ""
     @objc dynamic var imageURL: String = ""
     @objc dynamic var score: Int = 0

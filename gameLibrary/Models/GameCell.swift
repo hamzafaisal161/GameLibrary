@@ -10,7 +10,7 @@ import SwipeCellKit
 import RealmSwift
 import SnapKit
 
-class GameCell: SwipeTableViewCell {
+class GameCell: SwipeTableViewCell { //model for creating cell
     
     let gameImage = UIImageView()
     let genreView = UILabel()
@@ -21,7 +21,7 @@ class GameCell: SwipeTableViewCell {
     var dbHandler =  RealmDBHandler()
     
     
-    func setCell(game: FavoriteDetail){
+    func setCell(game: FavoriteDetail){ //setting up a cell when its being added on Favorite screen
         self.scoreView.text = String(game.score)
         self.titleView.text = game.name
         let url = URL(string: game.imageURL)
@@ -37,7 +37,7 @@ class GameCell: SwipeTableViewCell {
     }
     
     
-    func setCell(game: Game){
+    func setCell(game: Game){ //setting up a cell when its being added on Game List screen
         
         self.prepareCell()
         if let score = game.metacritic {
@@ -60,7 +60,7 @@ class GameCell: SwipeTableViewCell {
         }
     }
     
-    func prepareCell(){
+    func prepareCell(){ //adding constraints to a cell
         self.addSubview(gameImage)
         self.addSubview(genreView)
         self.addSubview(scoreView)

@@ -32,7 +32,7 @@ class FavoriteListController: UIViewController{
         
     }
     
-    func loadGames(){
+    func loadGames(){ //loading all the favorites
         games = dbHandler.loadFavorites()
         if games.count > 0{
             self.tabBarController?.title = "\(C.favourites) (\(games.count))"
@@ -43,7 +43,7 @@ class FavoriteListController: UIViewController{
     
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //passing the id of the game to the GameViewController
         if segue.identifier == C.segueName {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! GameViewController
@@ -53,7 +53,7 @@ class FavoriteListController: UIViewController{
         self.tabBarController?.title = C.favourites
     }
     
-    private func setLabel(){
+    private func setLabel(){ //displaying no favorites if there are no faovrites
         self.tabBarController?.title = C.favourites
         loadGames()
         if games.count == 0{
@@ -70,7 +70,7 @@ class FavoriteListController: UIViewController{
         }
     }
     
-    private func setTableView(){
+    private func setTableView(){ //setting up the tableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(GameCell.classForCoder(), forCellReuseIdentifier: C.cellIdentifier)
@@ -80,19 +80,7 @@ class FavoriteListController: UIViewController{
         
     }
     
-    func prepareView(){
-        self.view.addSubview(listView)
-        listView.addSubview(tableView)
-        tableView.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1.0)
-        tableView.separatorStyle = .none
-        
-        tableView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(listView.snp.top).offset(150)
-            make.leading.equalTo(listView.snp.leading)
-            make.size.equalTo(CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-            make.bottom.equalTo(listView.snp.bottom)
-        }
-    }
+    
     
 }
 
@@ -110,7 +98,7 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
         newViewController.id = games[indexPath.row].id
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { //populating the tableView with cells
         let cell = self.tableView.dequeueReusableCell(withIdentifier: C.cellIdentifier) as! GameCell
         cell.delegate = self
         cell.prepareCell()
@@ -125,7 +113,7 @@ extension FavoriteListController: UITableViewDelegate, UITableViewDataSource{
 
 extension FavoriteListController: SwipeTableViewCellDelegate{
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeCellKit.SwipeActionsOrientation) -> [SwipeCellKit.SwipeAction]? {
-        guard orientation == .right else { return nil }
+        guard orientation == .right else { return nil } //adding a swipe to open up a delete button action
 
             let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
                 self.dbHandler.removeFavorite(id: self.games[indexPath.row].id)
@@ -136,7 +124,7 @@ extension FavoriteListController: SwipeTableViewCellDelegate{
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-        var options = SwipeOptions()
+        var options = SwipeOptions() //adding a swipe to delete option
         options.expansionStyle = .destructive(automaticallyDelete: false)
         options.transitionStyle = .border
         return options

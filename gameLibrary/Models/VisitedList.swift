@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-class VisitedList: Object{
+class VisitedList: Object{ //model for storing id of visited game in Realm
     @objc dynamic var id: Int = 0
 }
 
